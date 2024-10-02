@@ -10,7 +10,7 @@ dependencies {
 
     // Json
     compileAndTest "com.google.code.gson:gson:2.11.0"
-    compileAndTest "com.alibaba.fastjson2:fastjson2:2.0.52"
+    compileAndTest "com.alibaba.fastjson2:fastjson2:2.0.53"
     compileAndTest "blue.endless:jankson:1.2.3"
 
     // Yaml
