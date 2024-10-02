@@ -1,0 +1,10 @@
+// Function, Collection, Math, Annotation, IO, String, Date, Time, DateTime, UUID, JSON, XML, HTTP, Logging, System, Thread, Process, File, Network
+
+publishing {
+    publications {
+        create("mavenUtil", MavenPublication) {
+            artifactId = "util"
+            from components.java
+        }
+    }
+}

@@ -1,0 +1,13 @@
+def powerfullib_projects = [
+        "annotation",
+        "i18n",
+        "event",
+        "util",
+        "config"
+]
+
+rootProject.name = "PowerfulLib"
+
+powerfullib_projects.forEach {
+    include it
+}

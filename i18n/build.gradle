@@ -1,0 +1,12 @@
+dependencies {
+    api project(":config")
+}
+
+publishing {
+    publications {
+        create("mavenI18n", MavenPublication) {
+            artifactId = "i18n"
+            from components.java
+        }
+    }
+}

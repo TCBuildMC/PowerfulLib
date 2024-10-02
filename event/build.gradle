@@ -1,0 +1,8 @@
+publishing {
+    publications {
+        create("mavenEvent", MavenPublication) {
+            artifactId = "event"
+            from components.java
+        }
+    }
+}

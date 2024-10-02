@@ -1,0 +1,73 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+}
+
+allprojects {
+    apply plugin: "java-library"
+
+    group = rootProject.maven_group
+    version = rootProject.release_version
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    tasks.withType(JavaCompile).configureEach { tsk ->
+        tsk.options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Test).configureEach { tsk ->
+        tsk.systemProperty "file.encoding", "UTF-8"
+    }
+
+    jar {
+        manifest {
+            attributes "Implementation-Version": project.version
+        }
+    }
+
+    compileJava.dependsOn clean
+}
+
+subprojects {
+    apply plugin: "maven-publish"
+
+    base {
+        archivesName = rootProject.archives_base_name + "-" + project.name
+    }
+
+    dependencies {
+        annotationProcessor(compileOnly("org.projectlombok:lombok:1.18.34"))
+        compileOnly "org.jetbrains:annotations:24.1.0"
+
+        testImplementation platform('org.junit:junit-bom:5.10.3')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testAnnotationProcessor(testCompileOnly("org.projectlombok:lombok:1.18.34"))
+    }
+
+    test {
+        useJUnitPlatform()
+
+        ignoreFailures true
+
+        testLogging {
+            exceptionFormat = "full"
+            events "passed", "skipped", "failed"
+        }
+    }
+
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+    }
+}
