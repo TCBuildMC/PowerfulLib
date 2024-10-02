@@ -1,4 +1,4 @@
 # PowerfulLib
 A common library.
 
-See [jitpack](htts://jitpack.io/#TCBuildMC/PowerfulLib).
+See [jitpack](https://jitpack.io/#TCBuildMC/PowerfulLib).
