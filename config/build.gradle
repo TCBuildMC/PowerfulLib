@@ -14,7 +14,7 @@ dependencies {
     compileAndTest "blue.endless:jankson:1.2.3"
 
     // Yaml
-    compileAndTest "org.yaml:snakeyaml:2.2"
+    compileAndTest "org.yaml:snakeyaml:2.3"
 
     // Toml
     compileAndTest "com.moandjiezana.toml:toml4j:0.7.2"
