@@ -1,3 +1,7 @@
+dependencies {
+    api project(":util")
+}
+
 publishing {
     publications {
         create("mavenEvent", MavenPublication) {

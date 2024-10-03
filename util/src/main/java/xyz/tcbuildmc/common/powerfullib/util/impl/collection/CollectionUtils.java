@@ -38,4 +38,11 @@ public class CollectionUtils {
     public static <K, V> BiMap<K, V> newHashBiMap(BiMap.Entry<K, V>... entries) {
         return Utils.make(new HashBiMap<>(), map -> map.putAll(entries));
     }
+
+    @SafeVarargs
+    public static <E> void removeAll(Collection<E> c, E... remove) {
+        for (E e : remove) {
+            c.removeIf(e::equals);
+        }
+    }
 }
