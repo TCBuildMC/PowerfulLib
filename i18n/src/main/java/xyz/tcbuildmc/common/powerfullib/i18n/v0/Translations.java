@@ -29,7 +29,7 @@ public final class Translations extends ConfigObject {
 
     public static Translations loadFromClasspathFile(@NotNull IConfigApi parent, String extName) throws IOException {
         try (InputStream is = Translations.class.getClassLoader().getResourceAsStream("lang/" + getLanguageCode() + "." + extName)) {
-            return parent.read(Translations.class, is);
+            return new Translations(parent.read(Translations.class, is));
         }
     }
 
