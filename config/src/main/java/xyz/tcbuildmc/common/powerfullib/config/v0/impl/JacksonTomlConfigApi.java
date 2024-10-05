@@ -3,33 +3,26 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.reflect.TypeRef;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class JacksonTomlConfigApi implements IConfigApi {
+public class JacksonTomlConfigApi implements ConfigApi {
     private final ThreadLocal<TomlMapper> mapper;
 
-    private JacksonTomlConfigApi(TomlMapper mapper) {
+    public JacksonTomlConfigApi(TomlMapper mapper) {
         this.mapper = ThreadLocal.withInitial(() -> mapper);
     }
 
-    private JacksonTomlConfigApi() {
+    public JacksonTomlConfigApi() {
         this(new TomlMapper());
     }
 
-    public static IConfigApi create(TomlMapper mapper) {
-        return new JacksonTomlConfigApi(mapper);
-    }
-
-    public static IConfigApi create() {
-        return new JacksonTomlConfigApi();
-    }
-
     @Override
-    public <T> T read(Class<T> clazz, String config) {
+    public <T> T read(String config, Class<T> clazz) {
         try {
-            T object = this.mapper.get().readValue(config, new TypeReference<T>() {});
+            T object = this.mapper.get().readValue(config, clazz);
 
             if (object == null) {
                 return clazz.getDeclaredConstructor().newInstance();
@@ -41,7 +34,21 @@ public class JacksonTomlConfigApi implements IConfigApi {
                  IllegalAccessException |
                  InvocationTargetException |
                  NoSuchMethodException e) {
-            throw new RuntimeException("Failed to deserialize Yml.", e);
+            throw new RuntimeException("Failed to deserialize.", e);
+        }
+    }
+
+    public <T> T read(String config, TypeReference<T> typeReference) {
+        try {
+            T object = this.mapper.get().readValue(config, typeReference);
+
+            if (object == null) {
+                return ((Class<T>) typeReference.getType()).getDeclaredConstructor().newInstance();
+            }
+
+            return object;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to deserialize.", e);
         }
     }
 
@@ -50,7 +57,7 @@ public class JacksonTomlConfigApi implements IConfigApi {
         try {
             return this.mapper.get().writer().withDefaultPrettyPrinter().writeValueAsString(data);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize Yml.", e);
+            throw new RuntimeException("Failed to serialize.", e);
         }
     }
 }

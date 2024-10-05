@@ -2,12 +2,12 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.api.manager;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 
 @RequiredArgsConstructor
-public abstract class AbstractConfigManager<T> implements IConfigManager<T> {
+public abstract class AbstractConfigManager<T> implements ConfigManager<T> {
     protected final Class<T> clazz;
-    protected final IConfigApi parent;
+    protected final ConfigApi parent;
 
     @Nullable
     protected T instance;

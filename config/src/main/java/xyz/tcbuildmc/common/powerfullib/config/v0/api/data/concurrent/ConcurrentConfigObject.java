@@ -2,7 +2,7 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.api.data.concurrent;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 
 import java.util.List;
 import java.util.Map;
@@ -62,8 +62,8 @@ public class ConcurrentConfigObject extends ConcurrentHashMap<String, Object> {
         return super.merge(key, value, (a, b) -> b);
     }
 
-    public <T> T to(IConfigApi parent, Class<T> clazz) {
+    public <T> T to(ConfigApi parent, Class<T> clazz) {
         String data = parent.write(this);
-        return parent.read(clazz, data);
+        return parent.read(data, clazz);
     }
 }

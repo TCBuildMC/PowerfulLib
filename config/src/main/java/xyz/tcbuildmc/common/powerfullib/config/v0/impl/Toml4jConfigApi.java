@@ -2,33 +2,25 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-public final class Toml4jConfigApi implements IConfigApi {
+public final class Toml4jConfigApi implements ConfigApi {
     private final ThreadLocal<Toml> toml;
     private final ThreadLocal<TomlWriter> tomlWriter;
 
-    private Toml4jConfigApi(Toml toml, TomlWriter tomlWriter) {
+    public Toml4jConfigApi(Toml toml, TomlWriter tomlWriter) {
         this.toml = ThreadLocal.withInitial(() -> toml);
         this.tomlWriter = ThreadLocal.withInitial(() -> tomlWriter);
     }
 
-    private Toml4jConfigApi() {
+    public Toml4jConfigApi() {
         this(new Toml(), new TomlWriter.Builder().build());
     }
 
-    public static IConfigApi create(Toml toml, TomlWriter tomlWriter) {
-        return new Toml4jConfigApi(toml, tomlWriter);
-    }
-
-    public static IConfigApi create() {
-        return new Toml4jConfigApi();
-    }
-
     @Override
-    public <T> T read(Class<T> clazz, String config) {
+    public <T> T read(String config, Class<T> clazz) {
         try {
             T object = this.toml.get().read(config).to(clazz);
 

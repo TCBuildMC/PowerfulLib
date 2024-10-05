@@ -1,31 +1,23 @@
 package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import org.yaml.snakeyaml.Yaml;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-public final class SnakeYamlConfigApi implements IConfigApi {
+public final class SnakeYamlConfigApi implements ConfigApi {
     private final ThreadLocal<Yaml> yaml;
 
-    private SnakeYamlConfigApi(Yaml yaml) {
+    public SnakeYamlConfigApi(Yaml yaml) {
         this.yaml = ThreadLocal.withInitial(() -> yaml);
     }
 
-    private SnakeYamlConfigApi() {
+    public SnakeYamlConfigApi() {
         this(new Yaml());
     }
 
-    public static IConfigApi create(Yaml yaml) {
-        return new SnakeYamlConfigApi(yaml);
-    }
-
-    public static IConfigApi create() {
-        return new SnakeYamlConfigApi();
-    }
-
     @Override
-    public <T> T read(Class<T> clazz, String config) {
+    public <T> T read(String config, Class<T> clazz) {
         try {
             T object = this.yaml.get().load(config);
 

@@ -2,7 +2,7 @@ package xyz.tcbuildmc.common.powerfullib.i18n.v0;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.data.ConfigObject;
 
 import java.io.IOException;
@@ -27,9 +27,9 @@ public final class Translations extends ConfigObject {
         return Locale.getDefault().getLanguage() + spec + Locale.getDefault().getCountry().toLowerCase(Locale.ROOT);
     }
 
-    public static Translations loadFromClasspathFile(@NotNull IConfigApi parent, String extName) throws IOException {
+    public static Translations loadFromClasspathFile(@NotNull ConfigApi parent, String extName) throws IOException {
         try (InputStream is = Translations.class.getClassLoader().getResourceAsStream("lang/" + getLanguageCode() + "." + extName)) {
-            return new Translations(parent.read(Translations.class, is));
+            return new Translations(parent.read(is, Translations.class));
         }
     }
 

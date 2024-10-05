@@ -4,8 +4,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Indicates that an element is not yet implemented.
+ * Indicates that an element is unsafe and should not be used.
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Todo {
+public @interface Unsafe {
 }

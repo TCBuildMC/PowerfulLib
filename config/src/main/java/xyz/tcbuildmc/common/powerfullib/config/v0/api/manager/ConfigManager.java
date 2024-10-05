@@ -6,7 +6,7 @@ import xyz.tcbuildmc.common.powerfullib.util.api.Reloadable;
 
 import java.io.IOException;
 
-public interface IConfigManager<T> extends Reloadable, Cleanable {
+public interface ConfigManager<T> extends Reloadable, Cleanable {
     @Nullable
     T getInstance();
 

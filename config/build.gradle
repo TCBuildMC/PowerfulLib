@@ -1,10 +1,11 @@
 configurations {
     compileAndTest
     compileOnly.extendsFrom compileAndTest
-    testRuntimeOnly.extendsFrom compileAndTest
+    testImplementation.extendsFrom compileAndTest
 }
 
 dependencies {
+    api project(":annotation")
     api project(":util")
     api "commons-io:commons-io:2.17.0"
 

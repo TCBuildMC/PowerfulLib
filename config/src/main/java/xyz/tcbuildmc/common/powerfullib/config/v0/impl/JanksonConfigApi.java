@@ -1,33 +1,21 @@
 package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import blue.endless.jankson.Jankson;
-import blue.endless.jankson.api.DeserializationException;
-import blue.endless.jankson.api.SyntaxError;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
 
-import java.lang.reflect.InvocationTargetException;
-
-public final class JanksonConfigApi implements IConfigApi {
+public final class JanksonConfigApi implements ConfigApi {
     private final ThreadLocal<Jankson> jankson;
 
-    private JanksonConfigApi(Jankson jankson) {
+    public JanksonConfigApi(Jankson jankson) {
         this.jankson = ThreadLocal.withInitial(() -> jankson);
     }
 
-    private JanksonConfigApi() {
+    public JanksonConfigApi() {
         this(new Jankson.Builder().build());
     }
 
-    public static IConfigApi create(Jankson jankson) {
-        return new JanksonConfigApi(jankson);
-    }
-
-    public static IConfigApi create() {
-        return new JanksonConfigApi();
-    }
-
     @Override
-    public <T> T read(Class<T> clazz, String config) {
+    public <T> T read(String config, Class<T> clazz) {
         try {
             T object = this.jankson.get().fromJsonCarefully(config, clazz);
 
@@ -36,12 +24,7 @@ public final class JanksonConfigApi implements IConfigApi {
             }
 
             return object;
-        } catch (SyntaxError |
-                 DeserializationException |
-                 InstantiationException |
-                 IllegalAccessException |
-                 InvocationTargetException |
-                 NoSuchMethodException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Failed to deserialize Json.", e);
         }
     }

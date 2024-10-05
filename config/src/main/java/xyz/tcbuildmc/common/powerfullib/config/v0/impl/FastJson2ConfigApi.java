@@ -2,19 +2,19 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONException;
-import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import com.alibaba.fastjson2.TypeReference;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.ConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.reflect.TypeRef;
 
-import java.lang.reflect.InvocationTargetException;
-
-public final class FastJson2ConfigApi implements IConfigApi {
+public final class FastJson2ConfigApi implements ConfigApi {
     private FastJson2ConfigApi() {}
 
-    public static IConfigApi create() {
+    public static ConfigApi create() {
         return new FastJson2ConfigApi();
     }
 
     @Override
-    public <T> T read(Class<T> clazz, String config) {
+    public <T> T read(String config, Class<T> clazz) {
         try {
             T object = JSON.parseObject(config, clazz);
 
@@ -23,12 +23,37 @@ public final class FastJson2ConfigApi implements IConfigApi {
             }
 
             return object;
-        } catch (JSONException |
-                 InstantiationException |
-                 IllegalAccessException |
-                 InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException("Failed to deserialize Json.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to deserialize.", e);
+        }
+    }
+
+    @Override
+    public <T> T read(String config, TypeRef<T> typeRef) {
+        try {
+            T object = JSON.parseObject(config, typeRef.getType());
+
+            if (object == null) {
+                return ((Class<T>) typeRef.getRawType()).getDeclaredConstructor().newInstance();
+            }
+
+            return object;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to deserialize.", e);
+        }
+    }
+
+    public <T> T read(String config, TypeReference<T> typeReference) {
+        try {
+            T object = JSON.parseObject(config, typeReference.getType());
+
+            if (object == null) {
+                return (T) typeReference.getRawType().getDeclaredConstructor().newInstance();
+            }
+
+            return object;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to deserialize.", e);
         }
     }
 
@@ -37,7 +62,7 @@ public final class FastJson2ConfigApi implements IConfigApi {
         try {
             return JSON.toJSONString(data);
         } catch (JSONException e) {
-            throw new RuntimeException("Failed to serialize Json.", e);
+            throw new RuntimeException("Failed to serialize.", e);
         }
     }
 }

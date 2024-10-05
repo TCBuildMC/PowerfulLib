@@ -35,4 +35,10 @@ public final class Utils {
             os.write(buffer, 0, read);
         }
     }
+
+    public static void checkCondition(boolean condition) {
+        if (!condition) {
+            throw new IllegalArgumentException();
+        }
+    }
 }
