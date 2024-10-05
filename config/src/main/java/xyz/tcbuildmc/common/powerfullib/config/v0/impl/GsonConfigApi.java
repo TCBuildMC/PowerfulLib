@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
@@ -33,7 +34,7 @@ public final class GsonConfigApi implements IConfigApi {
     @Override
     public <T> T read(Class<T> clazz, String config) {
         try {
-            T object = this.gson.get().fromJson(config, clazz);
+            T object = this.gson.get().fromJson(config, new TypeToken<T>() {}.getType());
 
             if (object == null) {
                 return clazz.getDeclaredConstructor().newInstance();

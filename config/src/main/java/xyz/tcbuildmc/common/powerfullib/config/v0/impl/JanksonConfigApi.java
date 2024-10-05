@@ -1,11 +1,11 @@
 package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import blue.endless.jankson.Jankson;
+import blue.endless.jankson.api.DeserializationException;
 import blue.endless.jankson.api.SyntaxError;
 import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 @ApiStatus.Internal
@@ -31,7 +31,7 @@ public final class JanksonConfigApi implements IConfigApi {
     @Override
     public <T> T read(Class<T> clazz, String config) {
         try {
-            T object = this.jankson.get().fromJson(config, clazz);
+            T object = this.jankson.get().fromJsonCarefully(config, clazz);
 
             if (object == null) {
                 return clazz.getDeclaredConstructor().newInstance();
@@ -39,6 +39,7 @@ public final class JanksonConfigApi implements IConfigApi {
 
             return object;
         } catch (SyntaxError |
+                 DeserializationException |
                  InstantiationException |
                  IllegalAccessException |
                  InvocationTargetException |

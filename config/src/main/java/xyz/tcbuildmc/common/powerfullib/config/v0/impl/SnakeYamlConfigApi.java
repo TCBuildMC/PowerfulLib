@@ -4,7 +4,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.yaml.snakeyaml.Yaml;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 @ApiStatus.Internal

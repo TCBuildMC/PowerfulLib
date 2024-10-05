@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONException;
 import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 @ApiStatus.Internal
