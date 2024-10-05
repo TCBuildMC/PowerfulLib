@@ -25,7 +25,7 @@ public final class JanksonConfigApi implements ConfigApi {
 
             return object;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to deserialize Json.", e);
+            throw new RuntimeException("Failed to deserialize.", e);
         }
     }
 
