@@ -2,12 +2,10 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
-import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-@ApiStatus.Internal
 public final class Toml4jConfigApi implements IConfigApi {
     private final ThreadLocal<Toml> toml;
     private final ThreadLocal<TomlWriter> tomlWriter;

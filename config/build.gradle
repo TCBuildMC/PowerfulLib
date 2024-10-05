@@ -12,18 +12,23 @@ dependencies {
     compileAndTest "com.google.code.gson:gson:2.11.0"
     compileAndTest "com.alibaba.fastjson2:fastjson2:2.0.53"
     compileAndTest "blue.endless:jankson:1.2.3"
+    compileAndTest "com.fasterxml.jackson.core:jackson-databind:2.16.2"
 
     // Yaml
     compileAndTest "org.yaml:snakeyaml:2.3"
+    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.2"
 
     // Toml
     compileAndTest "com.moandjiezana.toml:toml4j:0.7.2"
+    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-toml:2.16.2"
 
     // Properties
+    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.2"
 
     // INI
 
     // XML
+    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.2"
 
     // Hocon
 }

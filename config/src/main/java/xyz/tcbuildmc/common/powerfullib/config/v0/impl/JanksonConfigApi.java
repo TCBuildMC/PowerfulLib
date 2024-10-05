@@ -3,12 +3,10 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.api.DeserializationException;
 import blue.endless.jankson.api.SyntaxError;
-import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-@ApiStatus.Internal
 public final class JanksonConfigApi implements IConfigApi {
     private final ThreadLocal<Jankson> jankson;
 

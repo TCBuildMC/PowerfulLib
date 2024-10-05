@@ -5,13 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-@ApiStatus.Internal
 public final class GsonConfigApi implements IConfigApi {
     private final ThreadLocal<Gson> gson;
 

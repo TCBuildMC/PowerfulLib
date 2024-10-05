@@ -2,12 +2,10 @@ package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONException;
-import org.jetbrains.annotations.ApiStatus;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-@ApiStatus.Internal
 public final class FastJson2ConfigApi implements IConfigApi {
     private FastJson2ConfigApi() {}
 

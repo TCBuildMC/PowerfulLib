@@ -1,12 +1,10 @@
 package xyz.tcbuildmc.common.powerfullib.config.v0.impl;
 
-import org.jetbrains.annotations.ApiStatus;
 import org.yaml.snakeyaml.Yaml;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
 
 import java.lang.reflect.InvocationTargetException;
 
-@ApiStatus.Internal
 public final class SnakeYamlConfigApi implements IConfigApi {
     private final ThreadLocal<Yaml> yaml;
 
