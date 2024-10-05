@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class ConfigObject extends HashMap<String, Object> {
+public class ConfigObject extends HashMap<String, Object> {
     public ConfigObject() {
     }
 
@@ -46,6 +46,11 @@ public final class ConfigObject extends HashMap<String, Object> {
         }
 
         return self;
+    }
+
+    public Object getByPathOrDefault(String path, Object defaultValue) {
+        Object value = getByPath(path);
+        return value != null ? value : defaultValue;
     }
 
     public Object set(String key, Object value) {

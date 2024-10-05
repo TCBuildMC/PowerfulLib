@@ -3,23 +3,20 @@ package xyz.tcbuildmc.common.powerfullib.i18n.v0;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import xyz.tcbuildmc.common.powerfullib.config.v0.api.IConfigApi;
+import xyz.tcbuildmc.common.powerfullib.config.v0.api.data.ConfigObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 @Getter
-public final class Translations {
-    private final Map<String, String> translations;
-
+public final class Translations extends ConfigObject {
     public Translations() {
-        this(new HashMap<>());
     }
 
-    public Translations(Map<String, String> translations) {
-        this.translations = translations;
+    public Translations(Map<? extends String, ?> m) {
+        super(m);
     }
 
     public static String getLanguageCode() {
@@ -32,12 +29,12 @@ public final class Translations {
 
     public static Translations loadFromClasspathFile(@NotNull IConfigApi parent, String extName) throws IOException {
         try (InputStream is = Translations.class.getClassLoader().getResourceAsStream("lang/" + getLanguageCode() + "." + extName)) {
-            return new Translations((Map<String, String>) parent.read(Map.class, is));
+            return parent.read(Translations.class, is);
         }
     }
 
     public boolean has(String key) {
-        return this.translations.containsKey(key);
+        return super.containsKey(key);
     }
 
     public String tr(String key) {
@@ -45,6 +42,6 @@ public final class Translations {
     }
 
     public String tr(String key, String defaultValue) {
-        return this.translations.getOrDefault(key, defaultValue);
+        return (String) super.getByPathOrDefault(key, defaultValue);
     }
 }
