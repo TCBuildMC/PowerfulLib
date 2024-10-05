@@ -28,7 +28,7 @@ dependencies {
     // INI
 
     // XML
-    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.2"
+    compileAndTest "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.0"
 
     // Hocon
 }
