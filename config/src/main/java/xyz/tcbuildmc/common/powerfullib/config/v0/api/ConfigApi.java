@@ -13,10 +13,27 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
+/**
+ * Just another config api.
+ */
 @SuppressWarnings("unused")
 public interface ConfigApi {
+    /**
+     * Reads an object from a config.
+     * @param config The config.
+     * @param clazz The class of the object.
+     * @return The object.
+     * @param <T> The type of the object.
+     */
     <T> T read(String config, Class<T> clazz);
 
+    /**
+     * Reads an object from a config.
+     * @param config The config.
+     * @param typeRef The {@link TypeRef} of the object.
+     * @return The object.
+     * @param <T> The type of the object.
+     */
     default <T> T read(String config, TypeRef<T> typeRef) {
         return read(config, (Class<T>) typeRef.getType());
     }
@@ -165,6 +182,12 @@ public interface ConfigApi {
         return this.read(new String(config, charset), typeRef);
     }
 
+    /**
+     * Write an object to a config.
+     * @param data The object.
+     * @return The config.
+     * @param <T> The type of the object.
+     */
     <T> String write(T data);
 
     default <T> void write(T data, File config) {

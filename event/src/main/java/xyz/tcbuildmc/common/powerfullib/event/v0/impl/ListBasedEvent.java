@@ -1,13 +1,13 @@
 package xyz.tcbuildmc.common.powerfullib.event.v0.impl;
 
-import xyz.tcbuildmc.common.powerfullib.event.v0.api.IEvent;
+import xyz.tcbuildmc.common.powerfullib.event.v0.api.Event;
 import xyz.tcbuildmc.common.powerfullib.util.impl.collection.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ListBasedEvent<T> implements IEvent<T> {
+public abstract class ListBasedEvent<T> implements Event<T> {
     private final List<T> listeners;
 
     public ListBasedEvent() {

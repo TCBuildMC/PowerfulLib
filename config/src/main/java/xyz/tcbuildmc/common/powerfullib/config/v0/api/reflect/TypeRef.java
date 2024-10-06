@@ -5,6 +5,10 @@ import xyz.tcbuildmc.powerfullib.annotation.Unsafe;
 
 import java.lang.reflect.*;
 
+/**
+ * Type reference.
+ * @param <T> Type.
+ */
 @Getter
 public abstract class TypeRef<T> {
     private final Class<? super T> rawType;
