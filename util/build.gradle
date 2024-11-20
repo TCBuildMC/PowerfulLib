@@ -1,6 +1,6 @@
 // Function, Collection, Math, Annotation, IO, String, Date, Time, DateTime, UUID, JSON, XML, HTTP, Logging, System, Thread, Process, File, Network
 dependencies {
-    api "commons-io:commons-io:2.17.0"
+    api "commons-io:commons-io:2.18.0"
 }
 
 publishing {
